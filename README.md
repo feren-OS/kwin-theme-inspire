@@ -8,7 +8,9 @@ The Feren OS KWin Theme is a fork of the official KDE Breeze KWin Theme which is
 
 This theme was forked from the official KWin Breeze Theme Source Code, and you'll find credits for who made the theme in each code file.
 
-Parts of 'Breeze10' by https://github.com/fauzie811 were also used and adapted into this theme, mainly around the code for the titlebar buttons. 
+Parts of 'Breeze10' by https://github.com/fauzie811 were also used and adapted into this theme, mainly around the code for the titlebar buttons.
+
+You can see most of the code changes made in this fork by visiting this link: https://github.com/feren-OS/kwin-theme-feren/commit/fdd119e2405cceac1c4a54b81a989caf49d10b5f
 
 ## Installation
 
