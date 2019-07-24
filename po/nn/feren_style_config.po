@@ -1,4 +1,4 @@
-# Translation of breeze_style_config to Norwegian Nynorsk
+# Translation of feren_style_config to Norwegian Nynorsk
 #
 # Karl Ove Hufthammer <karl@huftis.org>, 2015, 2016, 2018.
 msgid ""

@@ -1,9 +1,9 @@
-# translation of breeze_style_config.po to Slovak
+# translation of feren_style_config.po to Slovak
 # Roman Paholik <wizzardsk@gmail.com>, 2014, 2015, 2016, 2017.
 # Mthw <jari_45@hotmail.com>, 2018.
 msgid ""
 msgstr ""
-"Project-Id-Version: breeze_style_config\n"
+"Project-Id-Version: feren_style_config\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2019-05-20 07:45+0200\n"
 "PO-Revision-Date: 2018-09-14 10:08+0100\n"

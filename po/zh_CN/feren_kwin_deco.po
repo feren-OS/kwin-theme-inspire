@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: crowdin.com\n"
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-stable/messages/kde-workspace/breeze_kwin_deco.pot\n"
+"X-Crowdin-File: /kf5-stable/messages/kde-workspace/feren_kwin_deco.pot\n"
 
 #: config/breezeexceptionlistwidget.cpp:112
 #, kde-format

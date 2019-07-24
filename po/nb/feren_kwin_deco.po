@@ -1,4 +1,4 @@
-# Translation of breeze_kwin_deco to Norwegian Bokmål
+# Translation of feren_kwin_deco to Norwegian Bokmål
 #
 # Axel Bojer <fri_programvare@bojer.no>, 2005, 2007.
 # Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2015.

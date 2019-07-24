@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: crowdin.com\n"
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-stable/messages/kde-workspace/breeze_style_config.pot\n"
+"X-Crowdin-File: /kf5-stable/messages/kde-workspace/feren_style_config.pot\n"
 
 #: main.cpp:40 main.cpp:44
 #, kde-format

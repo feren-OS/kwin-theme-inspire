@@ -1,7 +1,7 @@
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: breeze_style_config\n"
+"Project-Id-Version: feren_style_config\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2019-05-20 07:45+0200\n"
 "PO-Revision-Date: 2017-05-23 06:19-0400\n"

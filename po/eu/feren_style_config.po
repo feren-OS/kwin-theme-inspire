@@ -1,4 +1,4 @@
-# Translation of breeze_style_config.po to Euskara/Basque (eu).
+# Translation of feren_style_config.po to Euskara/Basque (eu).
 # Copyright (C) 2017-2018, Free Software Foundation.
 # This file is distributed under the same license as the kde-workspace package.
 # KDE euskaratzeko proiektuaren arduraduna <xalba@euskalnet.net>.
@@ -7,7 +7,7 @@
 # Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2017, 2018.
 msgid ""
 msgstr ""
-"Project-Id-Version: breeze_style_config\n"
+"Project-Id-Version: feren_style_config\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2019-05-20 07:45+0200\n"
 "PO-Revision-Date: 2018-05-22 22:57+0100\n"

@@ -1,4 +1,4 @@
-# Translation of breeze_style_config to Norwegian Bokmål
+# Translation of feren_style_config to Norwegian Bokmål
 #
 # Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2014, 2015.
 msgid ""

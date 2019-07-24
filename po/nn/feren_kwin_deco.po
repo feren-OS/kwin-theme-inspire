@@ -1,4 +1,4 @@
-# Translation of breeze_kwin_deco to Norwegian Nynorsk
+# Translation of feren_kwin_deco to Norwegian Nynorsk
 #
 # Gaute Hvoslef Kvalnes <gaute@verdsveven.com>, 2004, 2005.
 # Karl Ove Hufthammer <karl@huftis.org>, 2007, 2008, 2010, 2015, 2016, 2018, 2019.

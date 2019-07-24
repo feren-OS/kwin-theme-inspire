@@ -1,4 +1,4 @@
-# Translation of breeze_kwin_deco.po to Catalan (Valencian)
+# Translation of feren_kwin_deco.po to Catalan (Valencian)
 # Copyright (C) 2014-2018 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
@@ -7,7 +7,7 @@
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2015, 2018.
 msgid ""
 msgstr ""
-"Project-Id-Version: breeze_kwin_deco\n"
+"Project-Id-Version: feren_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2019-05-20 07:45+0200\n"
 "PO-Revision-Date: 2018-10-14 21:47+0100\n"

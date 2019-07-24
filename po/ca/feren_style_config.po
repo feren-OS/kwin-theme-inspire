@@ -1,4 +1,4 @@
-# Translation of breeze_style_config.po to Catalan
+# Translation of feren_style_config.po to Catalan
 # Copyright (C) 2014-2018 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
@@ -7,7 +7,7 @@
 # Josep Ma. Ferrer <txemaq@gmail.com>, 2014, 2015, 2016, 2017, 2018.
 msgid ""
 msgstr ""
-"Project-Id-Version: breeze_style_config\n"
+"Project-Id-Version: feren_style_config\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2019-05-20 07:45+0200\n"
 "PO-Revision-Date: 2018-02-17 10:55+0100\n"
