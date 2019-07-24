@@ -21,4 +21,4 @@ cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DKDE_INSTALL_LI
 make
 sudo make install
 ```
-After the intallation, restart KWin by logging out and in or using ALT+F2 and typing `kwin --replace` in there. 'Feren' will then appear in *System Settings &rarr; Application Style &rarr; Window Decorations* so that you can apply it.
+After the intallation, restart KWin by logging out and in or using ALT+F2 and typing `kwin --replace` in there. After that, 'Feren' will be available for application in *System Settings &rarr; Application Style &rarr; Window Decorations* so that you can apply it.
