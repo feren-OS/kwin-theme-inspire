@@ -1,0 +1,233 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Maxence Le Doré <maxence.ledore@gmail.com>, 2014, 2015.
+# Vincent Pinon <vpinon@kde.org>, 2016.
+# Simon Depiets <sdepiets@gmail.com>, 2018.
+# Yoann Laissus <yoann.laissus@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2019-05-20 07:45+0200\n"
+"PO-Revision-Date: 2018-11-05 18:55+0100\n"
+"Last-Translator: Yoann Laissus <yoann.laissus@gmail.com>\n"
+"Language-Team: French <kde-francophone@kde.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 2.0\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: main.cpp:40 main.cpp:44
+#, kde-format
+msgid "Breeze Settings"
+msgstr "Paramètres de Breeze"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: ui/breezestyleconfig.ui:39
+#, kde-format
+msgid "General"
+msgstr "Général"
+
+#. i18n: ectx: property (text), widget (QLabel, _windowDragLabel)
+#: ui/breezestyleconfig.ui:51
+#, kde-format
+msgid "W&indows' drag mode:"
+msgstr "Mode de glissement des fenêtres :"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _viewDrawFocusIndicator)
+#: ui/breezestyleconfig.ui:64
+#, kde-format
+msgid "Draw focus indicator in lists"
+msgstr "Afficher l'indicateur de focus dans les listes"
+
+#. i18n: ectx: property (text), widget (QLabel, _mnemonicsLabel)
+#: ui/breezestyleconfig.ui:71
+#, kde-format
+msgid "&Keyboard accelerators visibility:"
+msgstr "Visibilité des accélérateurs &clavier :"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:85
+#, kde-format
+msgid "Always Hide Keyboard Accelerators"
+msgstr "Toujours masquer les accélérateurs clavier"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:90
+#, kde-format
+msgid "Show Keyboard Accelerators When Needed"
+msgstr "Afficher les accélérateurs clavier quand nécessaire"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:95
+#, kde-format
+msgid "Always Show Keyboard Accelerators"
+msgstr "Toujours afficher les accélérateurs clavier"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:117
+#, kde-format
+msgid "Drag windows from titlebar only"
+msgstr "Faire glisser les fenêtres uniquement depuis la barre de titre"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:122
+#, kde-format
+msgid "Drag windows from titlebar, menubar and toolbars"
+msgstr ""
+"Faire glisser les fenêtres depuis la barre de titre, la barre de menu et les "
+"barres d'outils"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:127
+#, kde-format
+msgid "Drag windows from all empty areas"
+msgstr "Faire glisser les fenêtres depuis toutes les zones vides"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _tabBarDrawCenteredTabs)
+#: ui/breezestyleconfig.ui:148
+#, kde-format
+msgid "Center tabbar tabs"
+msgstr "Centrer les onglets de la barre d'onglets"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _toolBarDrawItemSeparator)
+#: ui/breezestyleconfig.ui:155
+#, kde-format
+msgid "Draw toolbar item separators"
+msgstr "Dessiner les séparateurs d'éléments de barre d'outil"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _sliderDrawTickMarks)
+#: ui/breezestyleconfig.ui:162
+#, kde-format
+msgid "Draw slider tick marks"
+msgstr "Dessiner des marques pour les curseurs"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _splitterProxyEnabled)
+#: ui/breezestyleconfig.ui:169
+#, kde-format
+msgid "Enable extended resize handles"
+msgstr "Activer la prise en charge de redimensionnement étendue"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: ui/breezestyleconfig.ui:177
+#, kde-format
+msgid "Animations"
+msgstr "Animations"
+
+#. i18n: ectx: property (text), widget (QLabel, _animationsDurationLabel)
+#: ui/breezestyleconfig.ui:186
+#, kde-format
+msgid "A&nimations duration:"
+msgstr "Durée des a&nimations :"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, _animationsDuration)
+#: ui/breezestyleconfig.ui:202
+#, kde-format
+msgid " ms"
+msgstr " ms"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _animationsEnabled)
+#: ui/breezestyleconfig.ui:212
+#, kde-format
+msgid "Enable animations"
+msgstr "Activer les animations"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
+#: ui/breezestyleconfig.ui:246
+#, kde-format
+msgid "Frames"
+msgstr "Cadres"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _dockWidgetDrawFrame)
+#: ui/breezestyleconfig.ui:252
+#, kde-format
+msgid "Draw frame around dockable panels"
+msgstr "Dessiner un cadre autour des panneaux pouvant être ancrés."
+
+#. i18n: ectx: property (text), widget (QCheckBox, _titleWidgetDrawFrame)
+#: ui/breezestyleconfig.ui:259
+#, kde-format
+msgid "Draw frame around page titles"
+msgstr "Dessiner un cadre autour des titres de page"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _sidePanelDrawFrame)
+#: ui/breezestyleconfig.ui:266
+#, kde-format
+msgid "Draw frame around side panels"
+msgstr "Dessiner un cadre autour des panneaux latéraux"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _menuItemDrawThinFocus)
+#: ui/breezestyleconfig.ui:273
+#, kde-format
+msgid "Draw a thin line to indicate focus in menus and menubars"
+msgstr ""
+"Dessiner un liseré pour signaler le focus dans les menus et barres de menus"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
+#: ui/breezestyleconfig.ui:294
+#, kde-format
+msgid "Scrollbars"
+msgstr "Barres de défilements"
+
+#. i18n: ectx: property (text), widget (QLabel, _scrollBarAddLineLabel)
+#: ui/breezestyleconfig.ui:313
+#, kde-format
+msgid "Bottom arrow button t&ype:"
+msgstr "T&ype de bouton pour flèche pointant vers le bas :"
+
+#. i18n: ectx: property (text), widget (QLabel, _scrollBarSubLineLabel)
+#: ui/breezestyleconfig.ui:326
+#, kde-format
+msgid "&Top arrow button type:"
+msgstr "Type de bouton pour flèche pointant vers le &haut"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:340 ui/breezestyleconfig.ui:359
+#, kde-format
+msgid "No Buttons"
+msgstr "Pas de boutons"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:345 ui/breezestyleconfig.ui:364
+#, kde-format
+msgid "One Button"
+msgstr "Un bouton"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:350 ui/breezestyleconfig.ui:369
+#, kde-format
+msgid "Two Buttons"
+msgstr "Deux boutons"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_5)
+#: ui/breezestyleconfig.ui:391
+#, kde-format
+msgid "Transparency"
+msgstr "Transparence"
+
+#. i18n: ectx: property (text), widget (QLabel, _menuOpacityTransparentLabel)
+#: ui/breezestyleconfig.ui:412
+#, kde-format
+msgid "Transparent"
+msgstr "Transparent"
+
+#. i18n: ectx: property (text), widget (QLabel, _menuOpacityOpaqueLabel)
+#: ui/breezestyleconfig.ui:438
+#, kde-format
+msgid "Opaque"
+msgstr "Opaque"
+
+#. i18n: ectx: property (text), widget (QLabel, _menuGroupDescription)
+#: ui/breezestyleconfig.ui:449
+#, kde-format
+msgid "Menu:"
+msgstr "Menu"
