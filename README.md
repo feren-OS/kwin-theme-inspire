@@ -24,3 +24,6 @@ make
 sudo make install
 ```
 After the intallation, restart KWin by logging out and in or using ALT+F2 and typing `kwin --replace` in there. After that, 'Feren' will be available for application in *System Settings &rarr; Application Style &rarr; Window Decorations* so that you can apply it.
+
+## Screenshot
+![Feren OS KWin Theme in action](https://raw.githubusercontent.com/feren-OS/kwin-theme-feren/screenshots/screenshot.png)
