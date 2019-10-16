@@ -3,6 +3,7 @@
 
 /*
  * Copyright 2014  Hugo Pereira Da Costa <hugo.pereira@free.fr>
+ * Copyright 2019  The Feren OS Dev <ferenosdev@outlook.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -38,7 +39,7 @@ namespace Breeze
     {
 
         //* corner radius (pixels)
-        Frame_FrameRadius = 3,
+        Frame_FrameRadius = 0,
 
         //* titlebar metrics, in units of small spacing
         TitleBar_TopMargin = 2,

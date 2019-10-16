@@ -4,6 +4,8 @@
 /*
 * Copyright 2014  Martin Gräßlin <mgraesslin@kde.org>
 * Copyright 2014  Hugo Pereira Da Costa <hugo.pereira@free.fr>
+* Copyright 2019  fauzie811 <https://github.com/fauzie811/Breeze10>
+* Copyright 2019  The Feren OS Dev <ferenosdev@outlook.com>
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License as
@@ -22,7 +24,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <KDecoration2/DecorationButton>
-#include "breezedecoration.h"
+#include "ferenkwin.h"
 
 #include <QHash>
 #include <QImage>
