@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "breezedecoration.h"
+#include "ferenkwin.h"
 #include "breezesettings.h"
 #include "breeze.h"
 

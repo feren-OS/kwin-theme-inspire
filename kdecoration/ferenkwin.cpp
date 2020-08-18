@@ -2,6 +2,8 @@
 * Copyright 2014  Martin Gräßlin <mgraesslin@kde.org>
 * Copyright 2014  Hugo Pereira Da Costa <hugo.pereira@free.fr>
 * Copyright 2018  Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+* Copyright 2019  fauzie811 <https://github.com/fauzie811/Breeze10>
+* Copyright 2019-2020  The Feren OS Dev <ferenosdev@outlook.com>
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License as
@@ -20,7 +22,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "breezedecoration.h"
+#include "ferenkwin.h"
 
 #include "breeze.h"
 #include "breezesettingsprovider.h"
@@ -149,6 +151,7 @@ namespace Breeze
 
     using KDecoration2::ColorRole;
     using KDecoration2::ColorGroup;
+    using KDecoration2::DecorationButtonType;
 
     //________________________________________________________________
     static int g_sDecoCount = 0;
@@ -202,21 +205,6 @@ namespace Breeze
                 m_opacity );
         } else return c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar );
 
-    }
-
-    //________________________________________________________________
-    QColor Decoration::outlineColor() const
-    {
-
-        auto c( client().data() );
-        if( !m_internalSettings->drawTitleBarSeparator() ) return QColor();
-        if( m_animation->state() == QAbstractAnimation::Running )
-        {
-            QColor color( c->palette().color( QPalette::Highlight ) );
-            color.setAlpha( color.alpha()*m_opacity );
-            return color;
-        } else if( c->isActive() ) return c->palette().color( QPalette::Highlight );
-        else return QColor();
     }
 
     //________________________________________________________________
@@ -410,11 +398,11 @@ namespace Breeze
 
             // padding below
             // extra pixel is used for the active window outline
-            const int baseSize = s->smallSpacing();
-            top += baseSize*Metrics::TitleBar_BottomMargin + 1;
+            //const int baseSize = s->smallSpacing();
+            //top += baseSize*Metrics::TitleBar_BottomMargin + 1;
 
             // padding above
-            top += baseSize*TitleBar_TopMargin;
+            //top += baseSize*TitleBar_TopMargin;
 
         }
 
@@ -456,14 +444,14 @@ namespace Breeze
         const auto s = settings();
 
         // adjust button position
-        const int bHeight = captionHeight() + (isTopEdge() ? s->smallSpacing()*Metrics::TitleBar_TopMargin:0);
-        const int bWidth = buttonHeight();
-        const int verticalOffset = (isTopEdge() ? s->smallSpacing()*Metrics::TitleBar_TopMargin:0) + (captionHeight()-buttonHeight())/2;
+        const int bHeight = captionHeight();
+        const int verticalOffset =  (captionHeight()-buttonHeight())/2;
         foreach( const QPointer<KDecoration2::DecorationButton>& button, m_leftButtons->buttons() + m_rightButtons->buttons() )
         {
+            const int bWidth = buttonHeight() * (button.data()->type() == DecorationButtonType::Menu ? 1.0 : 1.2);
             button.data()->setGeometry( QRectF( QPoint( 0, 0 ), QSizeF( bWidth, bHeight ) ) );
             static_cast<Button*>( button.data() )->setOffset( QPointF( 0, verticalOffset ) );
-            static_cast<Button*>( button.data() )->setIconSize( QSize( bWidth, bWidth ) );
+            static_cast<Button*>( button.data() )->setIconSize( QSize( bWidth, bHeight ) );
         }
 
         // left buttons
@@ -471,22 +459,9 @@ namespace Breeze
         {
 
             // spacing
-            m_leftButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
-
-            // padding
-            const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            if( isLeftEdge() )
-            {
-                // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
-                auto button = static_cast<Button*>( m_leftButtons->buttons().front().data() );
-                button->setGeometry( QRectF( QPoint( 0, 0 ), QSizeF( bWidth + hPadding, bHeight ) ) );
-                button->setFlag( Button::FlagFirstInList );
-                button->setHorizontalOffset( hPadding );
-
-                m_leftButtons->setPos(QPointF(0, vPadding));
-
-            } else m_leftButtons->setPos(QPointF(hPadding + borderLeft(), vPadding));
+            m_leftButtons->setSpacing(0);
+            
+            m_leftButtons->setPos(QPointF(borderLeft(), 0));
 
         }
 
@@ -495,21 +470,10 @@ namespace Breeze
         {
 
             // spacing
-            m_rightButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            m_rightButtons->setSpacing(0);
 
             // padding
-            const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            if( isRightEdge() )
-            {
-
-                auto button = static_cast<Button*>( m_rightButtons->buttons().back().data() );
-                button->setGeometry( QRectF( QPoint( 0, 0 ), QSizeF( bWidth + hPadding, bHeight ) ) );
-                button->setFlag( Button::FlagLastInList );
-
-                m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width(), vPadding));
-
-            } else m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() - hPadding - borderRight(), vPadding));
+            m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() - borderRight(), 0));
 
         }
 
@@ -536,8 +500,10 @@ namespace Breeze
             // clip away the top part
             if( !hideTitleBar() ) painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);
 
-            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect(), Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
-            else painter->drawRect( rect() );
+            //if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect(), Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+            //else painter->drawRect( rect() );
+            //Might as well save resources a bit (assuming roundedRect uses up more resources) if we aren't gonna have rounded corners, so, uh...
+            painter->drawRect( rect() );
 
             painter->restore();
         }
@@ -576,8 +542,8 @@ namespace Breeze
 
             const QColor titleBarColor( this->titleBarColor() );
             QLinearGradient gradient( 0, 0, 0, titleRect.height() );
-            gradient.setColorAt(0.0, titleBarColor.lighter( 120 ) );
-            gradient.setColorAt(0.8, titleBarColor);
+            gradient.setColorAt(0.0, titleBarColor.lighter( 105 ) );
+            gradient.setColorAt(1.0, titleBarColor);
             painter->setBrush(gradient);
 
         } else {
@@ -610,16 +576,6 @@ namespace Breeze
 
         }
 
-        const QColor outlineColor( this->outlineColor() );
-        if( !c->isShaded() && outlineColor.isValid() )
-        {
-            // outline
-            painter->setRenderHint( QPainter::Antialiasing, false );
-            painter->setBrush( Qt::NoBrush );
-            painter->setPen( outlineColor );
-            painter->drawLine( titleRect.bottomLeft(), titleRect.bottomRight() );
-        }
-
         painter->restore();
 
         // draw caption
@@ -641,18 +597,18 @@ namespace Breeze
         switch( m_internalSettings->buttonSize() )
         {
             case InternalSettings::ButtonTiny: return baseSize;
-            case InternalSettings::ButtonSmall: return baseSize*1.5;
+            case InternalSettings::ButtonSmall: return baseSize*2;
             default:
-            case InternalSettings::ButtonDefault: return baseSize*2;
-            case InternalSettings::ButtonLarge: return baseSize*2.5;
-            case InternalSettings::ButtonVeryLarge: return baseSize*3.5;
+            case InternalSettings::ButtonDefault: return baseSize*3;
+            case InternalSettings::ButtonLarge: return baseSize*4;
+            case InternalSettings::ButtonVeryLarge: return baseSize*5;
         }
 
     }
 
     //________________________________________________________________
     int Decoration::captionHeight() const
-    { return hideTitleBar() ? borderTop() : borderTop() - settings()->smallSpacing()*(Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin ) - 1; }
+    { return hideTitleBar() ? borderTop() : buttonHeight(); }
 
     //________________________________________________________________
     QPair<QRect,Qt::Alignment> Decoration::captionRect() const
@@ -669,7 +625,7 @@ namespace Breeze
                 Metrics::TitleBar_SideMargin*settings()->smallSpacing() :
                 size().width() - m_rightButtons->geometry().x() + Metrics::TitleBar_SideMargin*settings()->smallSpacing();
 
-            const int yOffset = settings()->smallSpacing()*Metrics::TitleBar_TopMargin;
+            const int yOffset = 0;
             const QRect maxRect( leftOffset, yOffset, size().width() - leftOffset - rightOffset, captionHeight() );
 
             switch( m_internalSettings->titleAlignment() )
@@ -831,4 +787,4 @@ namespace Breeze
 } // namespace
 
 
-#include "breezedecoration.moc"
+#include "ferenkwin.moc"

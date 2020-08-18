@@ -136,24 +136,10 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="0" colspan="3">
-        <widget class="QCheckBox" name="drawTitleBarSeparator">
-         <property name="text">
-          <string>Draw separator under active window's titlebar</string>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="0" colspan="3">
         <widget class="QCheckBox" name="drawBorderOnMaximizedWindows">
          <property name="text">
           <string>Allow resizing maximized windows from window edges</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="3">
-        <widget class="QCheckBox" name="outlineCloseButton">
-         <property name="text">
-          <string>Draw a circle around close button</string>
          </property>
         </widget>
        </item>
@@ -387,11 +373,9 @@
   <tabstop>tabWidget</tabstop>
   <tabstop>titleAlignment</tabstop>
   <tabstop>buttonSize</tabstop>
-  <tabstop>outlineCloseButton</tabstop>
   <tabstop>drawBorderOnMaximizedWindows</tabstop>
   <tabstop>drawBackgroundGradient</tabstop>
   <tabstop>drawSizeGrip</tabstop>
-  <tabstop>drawTitleBarSeparator</tabstop>
   <tabstop>animationsEnabled</tabstop>
   <tabstop>animationsDuration</tabstop>
   <tabstop>shadowSize</tabstop>

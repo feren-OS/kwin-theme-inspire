@@ -1,6 +1,8 @@
 /*
  * Copyright 2014  Martin Gräßlin <mgraesslin@kde.org>
  * Copyright 2014  Hugo Pereira Da Costa <hugo.pereira@free.fr>
+ * Copyright 2019  fauzie811 <https://github.com/fauzie811/Breeze10>
+ * Copyright 2019-2020  The Feren OS Dev <ferenosdev@outlook.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -53,6 +55,7 @@ namespace Breeze
 
         // setup default geometry
         const int height = decoration->buttonHeight();
+        const int width = height * (type == DecorationButtonType::Menu ? 1.0 : 1.2);
         setGeometry(QRect(0, 0, height, height));
         setIconSize(QSize( height, height ));
 
@@ -142,8 +145,14 @@ namespace Breeze
         // menu button
         if (type() == DecorationButtonType::Menu)
         {
-
-            const QRectF iconRect( geometry().topLeft(), m_iconSize );
+            // Welcome to abusing the fact that the normal icon size in this scenario is pretty much equal to the titlebar height to be able to find out what the titlebar height is - I couldn't get 'height' reading to work :v
+            // Set the icon size for the application icon
+            int iconpixelsize = (m_iconSize.height()*0.56);
+            // Set the Y location for the icon...
+            int iconlocation = ( (m_iconSize.height() / 2) - (iconpixelsize / 2) );
+            // Set the X location for the icon... if Y is used instead the icon will be permanently stuck to the left
+            int iconlocationx = (geometry().topLeft().x() + iconlocation);
+            const QRectF iconRect( iconlocationx, iconlocation, iconpixelsize, iconpixelsize );
             if (auto deco =  qobject_cast<Decoration*>(decoration())) {
                 const QPalette activePalette = KIconLoader::global()->customPalette();
                 QPalette palette = decoration()->client().data()->palette();
@@ -176,24 +185,19 @@ namespace Breeze
         painter->setRenderHints( QPainter::Antialiasing );
 
         /*
-        scale painter so that its window matches QRect( -1, -1, 20, 20 )
+        scale painter so that its window matches QRect( 0, 0, 36, 30 )
         this makes all further rendering and scaling simpler
-        all further rendering is preformed inside QRect( 0, 0, 18, 18 )
+        all further rendering is preformed inside QRect( 0, 0, 36, 30 )
         */
         painter->translate( geometry().topLeft() );
 
+        const qreal height( m_iconSize.height() );
         const qreal width( m_iconSize.width() );
-        painter->scale( width/20, width/20 );
-        painter->translate( 1, 1 );
+        if ( height != 30 )
+            painter->scale( width/36, height/32 );
 
         // render background
         const QColor backgroundColor( this->backgroundColor() );
-        if( backgroundColor.isValid() )
-        {
-            painter->setPen( Qt::NoPen );
-            painter->setBrush( backgroundColor );
-            painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
-        }
 
         // render mark
         const QColor foregroundColor( this->foregroundColor() );
@@ -204,7 +208,8 @@ namespace Breeze
             QPen pen( foregroundColor );
             pen.setCapStyle( Qt::RoundCap );
             pen.setJoinStyle( Qt::MiterJoin );
-            pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+            //pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+            pen.setWidthF( 2.0 );
 
             painter->setPen( pen );
             painter->setBrush( Qt::NoBrush );
@@ -214,98 +219,134 @@ namespace Breeze
 
                 case DecorationButtonType::Close:
                 {
-                    painter->drawLine( QPointF( 5, 5 ), QPointF( 13, 13 ) );
-                    painter->drawLine( 13, 5, 5, 13 );
+                    if( backgroundColor.isValid() )
+                    {
+                        painter->setPen( Qt::NoPen );
+                        painter->setBrush( backgroundColor );
+                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                    }
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
+
+                    painter->drawLine( QPointF( 13, 10 ), QPointF( 23, 20 ) );
+                    painter->drawLine( QPointF( 13, 20 ), QPointF( 23, 10 ) );
                     break;
                 }
 
                 case DecorationButtonType::Maximize:
                 {
-                    if( isChecked() )
+                    if( backgroundColor.isValid() )
                     {
-                        pen.setJoinStyle( Qt::RoundJoin );
-                        painter->setPen( pen );
-
-                        painter->drawPolygon( QVector<QPointF>{
-                            QPointF( 4, 9 ),
-                            QPointF( 9, 4 ),
-                            QPointF( 14, 9 ),
-                            QPointF( 9, 14 )} );
-
-                    } else {
-                        painter->drawPolyline( QVector<QPointF>{
-                            QPointF( 4, 11 ),
-                            QPointF( 9, 6 ),
-                            QPointF( 14, 11 )});
+                        painter->setPen( Qt::NoPen );
+                        painter->setBrush( backgroundColor );
+                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
                     }
+
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
+
+                    if (isChecked())
+                    {
+                        //For the thinner part of the symbol
+                        QPen thinpen = pen;
+                        thinpen.setWidthF( 1.0 );
+                        thinpen.setCapStyle( Qt::SquareCap );
+                        
+                        painter->drawRect(QRectF(12, 11, 10.0, 10.0));
+                        painter->setPen( thinpen );
+                        
+                        painter->drawLine( QPointF( 15, 8.5 ), QPointF( 24.5, 8.5 ) );
+                        painter->drawLine( QPointF( 24.5, 8.5 ), QPointF( 24.5, 19 ) );
+                    }
+                    else {
+                        painter->drawRect(QRectF(13, 10, 10.0, 10.0));
+                    }
+
                     break;
                 }
 
                 case DecorationButtonType::Minimize:
                 {
-                    painter->drawPolyline( QVector<QPointF>{
-                        QPointF( 4, 7 ),
-                        QPointF( 9, 12 ),
-                        QPointF( 14, 7 ) });
+                    if( backgroundColor.isValid() )
+                    {
+                        painter->setPen( Qt::NoPen );
+                        painter->setBrush( backgroundColor );
+                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                    }
+
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
+
+                    painter->drawLine( QPointF( 13, 15 ), QPointF( 23, 15 ) );
+
                     break;
                 }
 
                 case DecorationButtonType::OnAllDesktops:
                 {
                     painter->setPen( Qt::NoPen );
+                    if( backgroundColor.isValid() )
+                    {
+                        painter->setBrush( backgroundColor );
+                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                    }
                     painter->setBrush( foregroundColor );
 
-                    if( isChecked())
-                    {
+                    if( isChecked()) {
 
                         // outer ring
-                        painter->drawEllipse( QRectF( 3, 3, 12, 12 ) );
+                        painter->drawRect( QRectF( 13, 10, 11, 11 ) );
 
                         // center dot
-                        QColor backgroundColor( this->backgroundColor() );
-                        auto d = qobject_cast<Decoration*>( decoration() );
-                        if( !backgroundColor.isValid() && d ) backgroundColor = d->titleBarColor();
+                        //QColor backgroundColor( this->backgroundColor() );
+                        //if( !backgroundColor.isValid() && d ) backgroundColor = d->titleBarColor();
 
-                        if( backgroundColor.isValid() )
-                        {
-                            painter->setBrush( backgroundColor );
-                            painter->drawEllipse( QRectF( 8, 8, 2, 2 ) );
-                        }
+                        //if( backgroundColor.isValid() )
+                        //{
+                        //    painter->setBrush( backgroundColor );
+                        //    painter->drawRect( QRectF( 21, 14, 2, 2 ) );
+                        //}
 
                     } else {
 
-                        painter->drawPolygon( QVector<QPointF> {
-                            QPointF( 6.5, 8.5 ),
-                            QPointF( 12, 3 ),
-                            QPointF( 15, 6 ),
-                            QPointF( 9.5, 11.5 )} );
+                        pen.setWidthF( 1.5 );
+                        painter->drawPolygon( QPolygonF()
+                            << QPointF( 15.5, 15.5 )
+                            << QPointF( 21, 10 )
+                            << QPointF( 24, 13 )
+                            << QPointF( 18.5, 18.5 ) );
 
                         painter->setPen( pen );
-                        painter->drawLine( QPointF( 5.5, 7.5 ), QPointF( 10.5, 12.5 ) );
-                        painter->drawLine( QPointF( 12, 6 ), QPointF( 4.5, 13.5 ) );
+                        painter->drawLine( QPointF( 14.5, 14.5 ), QPointF( 19.5, 19.5 ) );
+                        painter->drawLine( QPointF( 21, 13 ), QPointF( 13.5, 20.5 ) );
+                        pen.setWidthF( 2.0 );
                     }
                     break;
                 }
 
                 case DecorationButtonType::Shade:
                 {
-
-                    if (isChecked())
+                    if( backgroundColor.isValid() )
                     {
+                        painter->setPen( Qt::NoPen );
+                        painter->setBrush( backgroundColor );
+                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                    }
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
 
-                        painter->drawLine( QPointF( 4, 5.5 ), QPointF( 14, 5.5 ) );
-                        painter->drawPolyline( QVector<QPointF> {
-                            QPointF( 4, 8 ),
-                            QPointF( 9, 13 ),
-                            QPointF( 14, 8 )} );
+                    painter->drawLine( 14, 13, 22, 13 );
+                    if (isChecked()) {
+                        painter->drawPolyline( QPolygonF()
+                            << QPointF( 14, 16 )
+                            << QPointF( 18, 20 )
+                            << QPointF( 22, 16 ) );
 
                     } else {
-
-                        painter->drawLine( QPointF( 4, 5.5 ), QPointF( 14, 5.5 ) );
-                        painter->drawPolyline(  QVector<QPointF> {
-                            QPointF( 4, 13 ),
-                            QPointF( 9, 8 ),
-                            QPointF( 14, 13 ) });
+                        painter->drawPolyline( QPolygonF()
+                            << QPointF( 14, 20 )
+                            << QPointF( 18, 16 )
+                            << QPointF( 22, 20 ) );
                     }
 
                     break;
@@ -314,52 +355,87 @@ namespace Breeze
 
                 case DecorationButtonType::KeepBelow:
                 {
+                    if( backgroundColor.isValid() )
+                    {
+                        painter->setPen( Qt::NoPen );
+                        painter->setBrush( backgroundColor );
+                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                    }
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
 
-                    painter->drawPolyline(  QVector<QPointF> {
-                        QPointF( 4, 5 ),
-                        QPointF( 9, 10 ),
-                        QPointF( 14, 5 ) });
+                    painter->drawPolyline( QPolygonF()
+                        << QPointF( 14, 12 )
+                        << QPointF( 18, 16 )
+                        << QPointF( 22, 12 ) );
 
-                    painter->drawPolyline(  QVector<QPointF> {
-                        QPointF( 4, 9 ),
-                        QPointF( 9, 14 ),
-                        QPointF( 14, 9 ) });
+                    painter->drawPolyline( QPolygonF()
+                        << QPointF( 14, 16 )
+                        << QPointF( 18, 20 )
+                        << QPointF( 22, 16 ) );
                     break;
 
                 }
 
                 case DecorationButtonType::KeepAbove:
                 {
-                    painter->drawPolyline(  QVector<QPointF> {
-                        QPointF( 4, 9 ),
-                        QPointF( 9, 4 ),
-                        QPointF( 14, 9 ) });
+                    if( backgroundColor.isValid() )
+                    {
+                        painter->setPen( Qt::NoPen );
+                        painter->setBrush( backgroundColor );
+                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                    }
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
 
-                    painter->drawPolyline(  QVector<QPointF> {
-                        QPointF( 4, 13 ),
-                        QPointF( 9, 8 ),
-                        QPointF( 14, 13 ) });
+                    painter->drawPolyline( QPolygonF()
+                        << QPointF( 14, 16 )
+                        << QPointF( 18, 12 )
+                        << QPointF( 22, 16 ) );
+
+                    painter->drawPolyline( QPolygonF()
+                        << QPointF( 14, 20 )
+                        << QPointF( 18, 16 )
+                        << QPointF( 22, 20 ) );
                     break;
                 }
 
 
                 case DecorationButtonType::ApplicationMenu:
                 {
-                    painter->drawRect( QRectF( 3.5, 4.5, 11, 1 ) );
-                    painter->drawRect( QRectF( 3.5, 8.5, 11, 1 ) );
-                    painter->drawRect( QRectF( 3.5, 12.5, 11, 1 ) );
+                    if( backgroundColor.isValid() )
+                    {
+                        painter->setPen( Qt::NoPen );
+                        painter->setBrush( backgroundColor );
+                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                    }
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
+
+                    painter->drawLine( QPointF( 13, 12 ), QPointF( 24, 12 ) );
+                    painter->drawLine( QPointF( 13, 16 ), QPointF( 24, 16 ) );
+                    painter->drawLine( QPointF( 13, 20 ), QPointF( 24, 20 ) );
                     break;
                 }
 
                 case DecorationButtonType::ContextHelp:
                 {
+                    if( backgroundColor.isValid() )
+                    {
+                        painter->setPen( Qt::NoPen );
+                        painter->setBrush( backgroundColor );
+                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                    }
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
+
                     QPainterPath path;
-                    path.moveTo( 5, 6 );
-                    path.arcTo( QRectF( 5, 3.5, 8, 5 ), 180, -180 );
-                    path.cubicTo( QPointF(12.5, 9.5), QPointF( 9, 7.5 ), QPointF( 9, 11.5 ) );
+                    path.moveTo( 14, 12 );
+                    path.arcTo( QRectF( 14, 9.5, 8, 5 ), 180, -180 );
+                    path.cubicTo( QPointF(22.5, 15.5), QPointF( 18, 13.5 ), QPointF( 18, 17.5 ) );
                     painter->drawPath( path );
 
-                    painter->drawRect( QRectF( 9, 15, 0.5, 0.5 ) );
+                    painter->drawPoint( 18, 21 );
 
                     break;
                 }
@@ -382,23 +458,38 @@ namespace Breeze
 
         } else if( isPressed() ) {
 
-            return d->titleBarColor();
+            if( type() == DecorationButtonType::Close ) {
+                QColor color(255,255,255);
+                return color;
+            } else {
+                return d->fontColor();
+            }
 
-        } else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
-
-            return d->titleBarColor();
+//         } else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
+// 
+//             return d->titleBarColor();
 
         } else if( ( type() == DecorationButtonType::KeepBelow || type() == DecorationButtonType::KeepAbove || type() == DecorationButtonType::Shade ) && isChecked() ) {
 
-            return d->titleBarColor();
+            return d->fontColor();
 
         } else if( m_animation->state() == QAbstractAnimation::Running ) {
 
-            return KColorUtils::mix( d->fontColor(), d->titleBarColor(), m_opacity );
+            if( type() == DecorationButtonType::Close ) {
+                QColor color(255,255,255);
+                return color;
+            } else {
+                return d->fontColor();
+            }
 
         } else if( isHovered() ) {
-
-            return d->titleBarColor();
+            
+            if( type() == DecorationButtonType::Close ) {
+                QColor color(255,255,255);
+                return color;
+            } else {
+                return d->fontColor();
+            }
 
         } else {
 
@@ -420,47 +511,52 @@ namespace Breeze
 
         auto c = d->client().data();
         if( isPressed() ) {
-
-            if( type() == DecorationButtonType::Close ) return c->color( ColorGroup::Warning, ColorRole::Foreground );
-            else return KColorUtils::mix( d->titleBarColor(), d->fontColor(), 0.3 );
+            
+            if( type() == DecorationButtonType::Close ) {
+                QColor color( 200,55,55 );
+                return color;
+            } else {
+                QColor color( d->fontColor() );
+                color.setAlpha( color.alpha()*m_opacity*0.2 );
+                return KColorUtils::mix( d->titleBarColor(), color, 1 );
+            }
 
         } else if( ( type() == DecorationButtonType::KeepBelow || type() == DecorationButtonType::KeepAbove || type() == DecorationButtonType::Shade ) && isChecked() ) {
 
-            return d->fontColor();
+            QColor color( d->fontColor() );
+            color.setAlpha( color.alpha()*m_opacity*0.2 );
+            return KColorUtils::mix( d->titleBarColor(), color, 1 );
 
         } else if( m_animation->state() == QAbstractAnimation::Running ) {
 
             if( type() == DecorationButtonType::Close )
             {
-                if( d->internalSettings()->outlineCloseButton() )
-                {
 
-                    return KColorUtils::mix( d->fontColor(), c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter(), m_opacity );
-
-                } else {
-
-                    QColor color( c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter() );
-                    color.setAlpha( color.alpha()*m_opacity );
-                    return color;
-
-                }
+                QColor color( 255,85,85 );
+                color.setAlpha( color.alpha()*m_opacity );
+                return color;
 
             } else {
 
                 QColor color( d->fontColor() );
-                color.setAlpha( color.alpha()*m_opacity );
-                return color;
+                color.setAlpha( color.alpha()*m_opacity*0.1 );
+                return KColorUtils::mix( d->titleBarColor(), color, 1 );
 
             }
 
         } else if( isHovered() ) {
 
-            if( type() == DecorationButtonType::Close ) return c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter();
-            else return d->fontColor();
-
-        } else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
-
-            return d->fontColor();
+            if( type() == DecorationButtonType::Close ) {
+                QColor color( 255,85,85 );
+                return color;
+                
+            } else {
+                
+                QColor color( d->fontColor() );
+                color.setAlpha( color.alpha()*m_opacity*0.1 );
+                return KColorUtils::mix( d->titleBarColor(), color, 1 );
+                
+            }
 
         } else {
 
