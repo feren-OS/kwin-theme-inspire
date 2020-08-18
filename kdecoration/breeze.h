@@ -3,7 +3,6 @@
 
 /*
  * Copyright 2014  Hugo Pereira Da Costa <hugo.pereira@free.fr>
- * Copyright 2019  The Feren OS Dev <ferenosdev@outlook.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -39,7 +38,7 @@ namespace Breeze
     {
 
         //* corner radius (pixels)
-        Frame_FrameRadius = 0,
+        Frame_FrameRadius = 3,
 
         //* titlebar metrics, in units of small spacing
         TitleBar_TopMargin = 2,
@@ -51,6 +50,17 @@ namespace Breeze
         Shadow_Overlap = 3,
 
     };
+
+    //* standard pen widths
+    namespace PenWidth
+    {
+        /* Using 1 instead of slightly more than 1 causes symbols drawn with
+         * pen strokes to look skewed. The exact amount added does not matter
+         * as long as it isn't too visible.
+         */
+        // The standard pen stroke width for symbols.
+        static constexpr qreal Symbol = 1.01;
+    }
 
     //* exception
     enum ExceptionMask

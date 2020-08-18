@@ -14,7 +14,7 @@ You can see most of the code changes made in this fork by visiting this link: ht
 
 ## Installation
 
-This theme was designed to be compiled on KWin 5.16.3, *however compilation can be attempted on other versions of KWin, but this is not recommended*.
+This theme was designed to be compiled on KWin 5.19.4, *however compilation can be attempted on other versions of KWin, but this is not recommended*.
 
 Open a terminal inside the source directory and do:
 ```sh

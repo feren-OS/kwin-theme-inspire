@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  *************************************************************************/
 
-#include "ferenkwin.h"
+#include "breezedecoration.h"
 #include "config-breeze.h"
 
 #include <QMouseEvent>

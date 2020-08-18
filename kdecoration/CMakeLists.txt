@@ -1,13 +1,13 @@
-add_definitions(-DTRANSLATION_DOMAIN="feren_kwin_deco")
+add_definitions(-DTRANSLATION_DOMAIN="breeze_kwin_deco")
 
-find_package(KF5 REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets WindowSystem I18n)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets WindowSystem I18n IconThemes)
 find_package(Qt5 CONFIG REQUIRED COMPONENTS DBus)
 
 ### XCB
 find_package(XCB COMPONENTS XCB)
 set_package_properties(XCB PROPERTIES
   DESCRIPTION "X protocol C-language Binding"
-  URL "http://xcb.freedesktop.org"
+  URL "https://xcb.freedesktop.org"
   TYPE OPTIONAL
   PURPOSE "Required to pass style properties to native Windows on X11 Platform"
 )
@@ -34,18 +34,18 @@ include_directories(${CMAKE_BINARY_DIR}/libbreezecommon)
 
 ################# newt target #################
 ### plugin classes
-set(ferenkwin_SRCS
+set(breezedecoration_SRCS
     breezebutton.cpp
-    ferenkwin.cpp
+    breezedecoration.cpp
     breezeexceptionlist.cpp
     breezesettingsprovider.cpp
     breezesizegrip.cpp)
 
-kconfig_add_kcfg_files(ferenkwin_SRCS breezesettings.kcfgc)
+kconfig_add_kcfg_files(breezedecoration_SRCS breezesettings.kcfgc)
 
 ### config classes
 ### they are kept separately because they might move in a separate library in the future
-set(ferenkwin_config_SRCS
+set(breezedecoration_config_SRCS
     config/breezeconfigwidget.cpp
     config/breezedetectwidget.cpp
     config/breezeexceptiondialog.cpp
@@ -54,22 +54,22 @@ set(ferenkwin_config_SRCS
     config/breezeitemmodel.cpp
 )
 
-set(ferenkwin_config_PART_FORMS
+set(breezedecoration_config_PART_FORMS
    config/ui/breezeconfigurationui.ui
    config/ui/breezedetectwidget.ui
    config/ui/breezeexceptiondialog.ui
    config/ui/breezeexceptionlistwidget.ui
 )
 
-ki18n_wrap_ui(ferenkwin_config_PART_FORMS_HEADERS ${ferenkwin_config_PART_FORMS})
+ki18n_wrap_ui(breezedecoration_config_PART_FORMS_HEADERS ${breezedecoration_config_PART_FORMS})
 
 ### build library
-add_library(ferenkwin MODULE
-    ${ferenkwin_SRCS}
-    ${ferenkwin_config_SRCS}
-    ${ferenkwin_config_PART_FORMS_HEADERS})
+add_library(breezedecoration MODULE
+    ${breezedecoration_SRCS}
+    ${breezedecoration_config_SRCS}
+    ${breezedecoration_config_PART_FORMS_HEADERS})
 
-target_link_libraries(ferenkwin
+target_link_libraries(breezedecoration
     PUBLIC
         Qt5::Core
         Qt5::Gui
@@ -82,15 +82,16 @@ target_link_libraries(ferenkwin
         KF5::ConfigWidgets
         KF5::GuiAddons
         KF5::I18n
+        KF5::IconThemes
         KF5::WindowSystem)
 
 if(BREEZE_HAVE_X11)
-  target_link_libraries(ferenkwin
+  target_link_libraries(breezedecoration
     PUBLIC
       Qt5::X11Extras
       XCB::XCB)
 endif()
 
 
-install(TARGETS ferenkwin DESTINATION ${PLUGIN_INSTALL_DIR}/org.kde.kdecoration2)
-install(FILES config/ferenkwinconfig.desktop DESTINATION  ${SERVICES_INSTALL_DIR})
+install(TARGETS breezedecoration DESTINATION ${PLUGIN_INSTALL_DIR}/org.kde.kdecoration2)
+install(FILES config/breezedecorationconfig.desktop DESTINATION  ${SERVICES_INSTALL_DIR})
