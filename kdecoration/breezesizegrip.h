@@ -15,7 +15,7 @@
 #include <QWidget>
 #include <QPointer>
 
-#if BREEZE_HAVE_X11
+#if FERENKWIN_HAVE_X11
 #include <xcb/xcb.h>
 #endif
 
@@ -75,7 +75,7 @@ namespace Breeze
         QPointer<Decoration> m_decoration;
 
         //* move/resize atom
-        #if BREEZE_HAVE_X11
+        #if FERENKWIN_HAVE_X11
         xcb_atom_t m_moveResizeAtom = 0;
         #endif
 

@@ -11,7 +11,7 @@
 #include "breezedetectwidget.h"
 #include "config-breeze.h"
 
-#if BREEZE_HAVE_X11
+#if FERENKWIN_HAVE_X11
 #include <QX11Info>
 #endif
 
@@ -44,7 +44,7 @@ namespace Breeze
         connect( m_ui.hideTitleBar, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged );
 
         // hide detection dialog on non X11 platforms
-        #if BREEZE_HAVE_X11
+        #if FERENKWIN_HAVE_X11
         if( !QX11Info::isPlatformX11() ) m_ui.detectDialogButton->hide();
         #else
         m_ui.detectDialogButton->hide();

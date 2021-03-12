@@ -10,6 +10,6 @@
 #define config_breeze_h
 
 /* Define to 1 if XCB libraries are found */
-#cmakedefine01 BREEZE_HAVE_X11
+#cmakedefine01 FERENKWIN_HAVE_X11
 
 #endif

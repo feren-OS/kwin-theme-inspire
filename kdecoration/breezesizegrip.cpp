@@ -13,7 +13,7 @@
 #include <QPolygon>
 #include <QTimer>
 
-#if BREEZE_HAVE_X11
+#if FERENKWIN_HAVE_X11
 #include <QX11Info>
 #endif
 
@@ -66,7 +66,7 @@ namespace Breeze
     //_____________________________________________
     void SizeGrip::updateActiveState()
     {
-        #if BREEZE_HAVE_X11
+        #if FERENKWIN_HAVE_X11
         if( QX11Info::isPlatformX11() )
         {
             const quint32 value = XCB_STACK_MODE_ABOVE;
@@ -83,7 +83,7 @@ namespace Breeze
     void SizeGrip::embed()
     {
 
-        #if BREEZE_HAVE_X11
+        #if FERENKWIN_HAVE_X11
 
         if( !QX11Info::isPlatformX11() ) return;
         auto c = m_decoration.data()->client().data();
@@ -175,7 +175,7 @@ namespace Breeze
     void SizeGrip::updatePosition()
     {
 
-        #if BREEZE_HAVE_X11
+        #if FERENKWIN_HAVE_X11
         if( !QX11Info::isPlatformX11() ) return;
 
         auto c = m_decoration.data()->client().data();
@@ -193,7 +193,7 @@ namespace Breeze
     void SizeGrip::sendMoveResizeEvent( QPoint position )
     {
 
-        #if BREEZE_HAVE_X11
+        #if FERENKWIN_HAVE_X11
         if( !QX11Info::isPlatformX11() ) return;
 
         // pointer to connection

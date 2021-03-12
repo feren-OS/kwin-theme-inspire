@@ -44,6 +44,8 @@ namespace Breeze
 
         //* paint
         void paint(QPainter *painter, const QRect &repaintRegion) override;
+        
+        QColor borderColor() const;
 
         //* internal settings
         InternalSettingsPtr internalSettings() const
@@ -108,7 +110,7 @@ namespace Breeze
         void createButtons();
         void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
         void updateShadow();
-        static QSharedPointer<KDecoration2::DecorationShadow> createShadowObject(const InternalSettingsPtr& internalSettings, const float strengthScale);
+        QSharedPointer<KDecoration2::DecorationShadow> createShadowObject(const InternalSettingsPtr& internalSettings, const float strengthScale);
 
         //*@name border size
         //@{

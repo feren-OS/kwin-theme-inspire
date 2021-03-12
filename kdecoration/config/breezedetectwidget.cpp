@@ -20,7 +20,7 @@
 #include <QPushButton>
 #include <QMouseEvent>
 #include <config-breeze.h>
-#if BREEZE_HAVE_X11
+#if FERENKWIN_HAVE_X11
 #include <QX11Info>
 #include <xcb/xcb.h>
 #endif
@@ -39,7 +39,7 @@ namespace Breeze
         connect( m_ui.buttonBox->button( QDialogButtonBox::Cancel ), &QAbstractButton::clicked, this, &QWidget::close );
         m_ui.windowClassCheckBox->setChecked( true );
 
-#if BREEZE_HAVE_X11
+#if FERENKWIN_HAVE_X11
         if (QX11Info::isPlatformX11()) {
             // create atom
             xcb_connection_t* connection( QX11Info::connection() );
@@ -131,7 +131,7 @@ namespace Breeze
     WId DetectDialog::findWindow()
     {
 
-        #if BREEZE_HAVE_X11
+        #if FERENKWIN_HAVE_X11
         if (!QX11Info::isPlatformX11()) {
             return 0;
         }
