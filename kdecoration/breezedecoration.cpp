@@ -547,8 +547,6 @@ namespace Breeze
             color.setAlphaF(0.27);
         }
 
-        color = alphaBlend(color, this->titleBarColor());
-
         return color;
     }
 
