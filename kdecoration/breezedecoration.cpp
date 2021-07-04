@@ -569,10 +569,8 @@ namespace Breeze
             // clip away the top part
             if( !hideTitleBar() ) painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);
 
-            //if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect(), Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
-            //else painter->drawRect( rect() );
-            //Might as well save resources a bit (assuming roundedRect uses up more resources) if we aren't gonna have rounded corners, so, uh...
-            painter->drawRect( rect() );
+            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect(), Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+            else painter->drawRect( rect() );
 
             painter->restore();
         }

@@ -11,6 +11,7 @@
 #include <KDecoration2/DecoratedClient>
 #include <KColorUtils>
 #include <KIconLoader>
+#include <KWindowSystem>
 
 #include <QPainter>
 #include <QVariantAnimation>
@@ -197,6 +198,8 @@ namespace Breeze
             pen.setJoinStyle( Qt::MiterJoin );
             //pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
             pen.setWidthF( 2.0 );
+            
+            const qreal buttonradius(KWindowSystem::compositingActive() ? Metrics::Frame_FrameRadius - 1.0 : 0.0);
 
             painter->setPen( pen );
             painter->setBrush( Qt::NoBrush );
@@ -209,8 +212,14 @@ namespace Breeze
                     if( backgroundColor.isValid() )
                     {
                         painter->setPen( Qt::NoPen );
+                        
+                        //Hitbox
+                        painter->setBrush( Qt::transparent );
+                        painter->drawRect( QRectF( 0, 0, 34, 32 ) );
+                        
+                        //Visual
                         painter->setBrush( backgroundColor );
-                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                        painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
                     }
                     painter->setPen( pen );
                     painter->setBrush( Qt::NoBrush );
@@ -225,8 +234,14 @@ namespace Breeze
                     if( backgroundColor.isValid() )
                     {
                         painter->setPen( Qt::NoPen );
+                        
+                        //Hitbox
+                        painter->setBrush( Qt::transparent );
+                        painter->drawRect( QRectF( 0, 0, 34, 32 ) );
+                        
+                        //Visual
                         painter->setBrush( backgroundColor );
-                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                        painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
                     }
 
                     painter->setPen( pen );
@@ -256,8 +271,14 @@ namespace Breeze
                     if( backgroundColor.isValid() )
                     {
                         painter->setPen( Qt::NoPen );
+                        
+                        //Hitbox
+                        painter->setBrush( Qt::transparent );
+                        painter->drawRect( QRectF( 0, 0, 34, 32 ) );
+                        
+                        //Visual
                         painter->setBrush( backgroundColor );
-                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                        painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
                     }
 
                     painter->setPen( pen );
@@ -272,8 +293,15 @@ namespace Breeze
                     painter->setPen( Qt::NoPen );
                     if( backgroundColor.isValid() )
                     {
+                        painter->setPen( Qt::NoPen );
+                        
+                        //Hitbox
+                        painter->setBrush( Qt::transparent );
+                        painter->drawRect( QRectF( 0, 0, 34, 32 ) );
+                        
+                        //Visual
                         painter->setBrush( backgroundColor );
-                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                        painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
                     }
                     painter->setBrush( foregroundColor );
 
@@ -317,8 +345,14 @@ namespace Breeze
                     if( backgroundColor.isValid() )
                     {
                         painter->setPen( Qt::NoPen );
+                        
+                        //Hitbox
+                        painter->setBrush( Qt::transparent );
+                        painter->drawRect( QRectF( 0, 0, 34, 32 ) );
+                        
+                        //Visual
                         painter->setBrush( backgroundColor );
-                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                        painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
                     }
                     painter->setPen( pen );
                     painter->setBrush( Qt::NoBrush );
@@ -347,8 +381,14 @@ namespace Breeze
                     if( backgroundColor.isValid() )
                     {
                         painter->setPen( Qt::NoPen );
+                        
+                        //Hitbox
+                        painter->setBrush( Qt::transparent );
+                        painter->drawRect( QRectF( 0, 0, 34, 32 ) );
+                        
+                        //Visual
                         painter->setBrush( backgroundColor );
-                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                        painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
                     }
                     painter->setPen( pen );
                     painter->setBrush( Qt::NoBrush );
@@ -371,8 +411,14 @@ namespace Breeze
                     if( backgroundColor.isValid() )
                     {
                         painter->setPen( Qt::NoPen );
+                        
+                        //Hitbox
+                        painter->setBrush( Qt::transparent );
+                        painter->drawRect( QRectF( 0, 0, 34, 32 ) );
+                        
+                        //Visual
                         painter->setBrush( backgroundColor );
-                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                        painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
                     }
                     painter->setPen( pen );
                     painter->setBrush( Qt::NoBrush );
@@ -395,8 +441,14 @@ namespace Breeze
                     if( backgroundColor.isValid() )
                     {
                         painter->setPen( Qt::NoPen );
+                        
+                        //Hitbox
+                        painter->setBrush( Qt::transparent );
+                        painter->drawRect( QRectF( 0, 0, 34, 32 ) );
+                        
+                        //Visual
                         painter->setBrush( backgroundColor );
-                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                        painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
                     }
                     painter->setPen( pen );
                     painter->setBrush( Qt::NoBrush );
@@ -412,8 +464,14 @@ namespace Breeze
                     if( backgroundColor.isValid() )
                     {
                         painter->setPen( Qt::NoPen );
+                        
+                        //Hitbox
+                        painter->setBrush( Qt::transparent );
+                        painter->drawRect( QRectF( 0, 0, 34, 32 ) );
+                        
+                        //Visual
                         painter->setBrush( backgroundColor );
-                        painter->drawRect( QRectF( 0, 0, 36, 32 ) );
+                        painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
                     }
                     painter->setPen( pen );
                     painter->setBrush( Qt::NoBrush );
