@@ -22,24 +22,9 @@ include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDEClangFormat)
 
-include(GtkUpdateIconCache)
-
-option(WITH_DECORATIONS "Build Inspire window decorations for KWin" ON)
-if(WITH_DECORATIONS)
-    find_package(KDecoration2 REQUIRED)
-    add_subdirectory(kdecoration)
-endif()
-
-add_subdirectory(colors)
-add_subdirectory(cursors)
+find_package(KDecoration2 REQUIRED)
+add_subdirectory(kdecoration)
 add_subdirectory(libinspirecommon)
-add_subdirectory(kstyle)
-add_subdirectory(misc)
-
-option(WITH_WALLPAPERS "Install Inspire default wallpapers" ON)
-if (WITH_WALLPAPERS)
-    add_subdirectory(wallpapers)
-endif()
 
 if(EXISTS ${CMAKE_SOURCE_DIR}/po AND IS_DIRECTORY ${CMAKE_SOURCE_DIR}/po)
     find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
