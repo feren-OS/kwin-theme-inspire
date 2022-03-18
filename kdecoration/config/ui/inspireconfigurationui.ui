@@ -152,13 +152,6 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0" colspan="3">
-        <widget class="QCheckBox" name="outlineCloseButton">
-         <property name="text">
-          <string>Draw a circle around close button</string>
-         </property>
-        </widget>
-       </item>
        <item row="4" column="0" colspan="3">
         <widget class="QCheckBox" name="drawBackgroundGradient">
          <property name="text">
@@ -320,7 +313,6 @@
   <tabstop>tabWidget</tabstop>
   <tabstop>titleAlignment</tabstop>
   <tabstop>buttonSize</tabstop>
-  <tabstop>outlineCloseButton</tabstop>
   <tabstop>drawBorderOnMaximizedWindows</tabstop>
   <tabstop>drawBackgroundGradient</tabstop>
   <tabstop>drawSizeGrip</tabstop>

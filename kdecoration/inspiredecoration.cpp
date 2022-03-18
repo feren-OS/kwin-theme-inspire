@@ -134,6 +134,7 @@ namespace Inspire
 
     using KDecoration2::ColorRole;
     using KDecoration2::ColorGroup;
+    using KDecoration2::DecorationButtonType;
 
     //________________________________________________________________
     static int g_sDecoCount = 0;
@@ -424,11 +425,11 @@ namespace Inspire
 
             // padding below
             // extra pixel is used for the active window outline
-            const int baseSize = s->smallSpacing();
-            top += baseSize*Metrics::TitleBar_BottomMargin + 1;
+//             const int baseSize = s->smallSpacing();
+//             top += baseSize*Metrics::TitleBar_BottomMargin + 1;
 
             // padding above
-            top += baseSize*Metrics::TitleBar_TopMargin;
+//             top += baseSize*Metrics::TitleBar_TopMargin;
 
         }
 
@@ -470,14 +471,14 @@ namespace Inspire
         const auto s = settings();
 
         // adjust button position
-        const int bHeight = captionHeight() + (isTopEdge() ? s->smallSpacing()*Metrics::TitleBar_TopMargin:0);
-        const int bWidth = buttonHeight();
-        const int verticalOffset = (isTopEdge() ? s->smallSpacing()*Metrics::TitleBar_TopMargin:0) + (captionHeight()-buttonHeight())/2;
+        const int bHeight = captionHeight();
+        const int verticalOffset = (captionHeight()-buttonHeight())/2;
         foreach( const QPointer<KDecoration2::DecorationButton>& button, m_leftButtons->buttons() + m_rightButtons->buttons() )
         {
+            const int bWidth = buttonHeight() * (button.data()->type() == DecorationButtonType::Menu ? 1.0 : 1.2);
             button.data()->setGeometry( QRectF( QPoint( 0, 0 ), QSizeF( bWidth, bHeight ) ) );
             static_cast<Button*>( button.data() )->setOffset( QPointF( 0, verticalOffset ) );
-            static_cast<Button*>( button.data() )->setIconSize( QSize( bWidth, bWidth ) );
+            static_cast<Button*>( button.data() )->setIconSize( QSize( bWidth, bHeight ) );
         }
 
         // left buttons
@@ -485,22 +486,10 @@ namespace Inspire
         {
 
             // spacing
-            m_leftButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            m_leftButtons->setSpacing(0);
 
-            // padding
-            const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            if( isLeftEdge() )
-            {
-                // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
-                auto button = static_cast<Button*>( m_leftButtons->buttons().front().data() );
-                button->setGeometry( QRectF( QPoint( 0, 0 ), QSizeF( bWidth + hPadding, bHeight ) ) );
-                button->setFlag( Button::FlagFirstInList );
-                button->setHorizontalOffset( hPadding );
 
-                m_leftButtons->setPos(QPointF(0, vPadding));
-
-            } else m_leftButtons->setPos(QPointF(hPadding + borderLeft(), vPadding));
+            m_leftButtons->setPos(QPointF(borderLeft(), 0));
 
         }
 
@@ -509,21 +498,10 @@ namespace Inspire
         {
 
             // spacing
-            m_rightButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            m_rightButtons->setSpacing(0);
 
-            // padding
-            const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            if( isRightEdge() )
-            {
 
-                auto button = static_cast<Button*>( m_rightButtons->buttons().back().data() );
-                button->setGeometry( QRectF( QPoint( 0, 0 ), QSizeF( bWidth + hPadding, bHeight ) ) );
-                button->setFlag( Button::FlagLastInList );
-
-                m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width(), vPadding));
-
-            } else m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() - hPadding - borderRight(), vPadding));
+            m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() - borderRight(), 0));
 
         }
 
@@ -568,14 +546,10 @@ namespace Inspire
     {
         auto c = client().data();
 
-        auto titlebarColor = c->color(ColorGroup::Active, ColorRole::TitleBar);
-
-        auto color = c->color(ColorGroup::Active, ColorRole::Foreground);
-        color.setAlphaF(0.75);
-        color = alphaBlend(color, titlebarColor);
-
+        QColor color( 0, 0, 0 );
+        color.setAlphaF(0.72);
         if (!c->isActive()) {
-            color.setAlphaF(0.25);
+            color.setAlphaF(0.27);
         }
 
         return color;
@@ -627,11 +601,11 @@ namespace Inspire
     void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     {
         const auto c = client().toStrongRef();
-        const QRect frontRect(QPoint(0, 1), QSize(size().width(), borderTop()+1));
+        const QRect frontRect(QPoint(0, 0), QSize(size().width(), borderTop()));
         const QRect backRect(QPoint(0, 0), QSize(size().width(), borderTop()));
 
         QBrush frontBrush;
-        QBrush backBrush( this->titleBarColor().lighter( 130 ) );
+        QBrush backBrush;
 
         if ( !backRect.intersects(repaintRegion) ) return;
 
@@ -642,9 +616,10 @@ namespace Inspire
         if( c->isActive() && m_internalSettings->drawBackgroundGradient() )
         {
 
+            const QColor titleBarColor( this->titleBarColor() );
             QLinearGradient gradient( 0, 0, 0, frontRect.height() );
-            gradient.setColorAt(0.0, titleBarColor().lighter( 120 ) );
-            gradient.setColorAt(0.8, titleBarColor());
+            gradient.setColorAt(0.0, titleBarColor.lighter( 105 ) );
+            gradient.setColorAt(1.0, titleBarColor);
 
             frontBrush = gradient;
 
@@ -717,18 +692,18 @@ namespace Inspire
         switch( m_internalSettings->buttonSize() )
         {
             case InternalSettings::ButtonTiny: return baseSize;
-            case InternalSettings::ButtonSmall: return baseSize*1.5;
+            case InternalSettings::ButtonSmall: return baseSize*2;
             default:
-            case InternalSettings::ButtonDefault: return baseSize*2;
-            case InternalSettings::ButtonLarge: return baseSize*2.5;
-            case InternalSettings::ButtonVeryLarge: return baseSize*3.5;
+            case InternalSettings::ButtonDefault: return baseSize*3;
+            case InternalSettings::ButtonLarge: return baseSize*4;
+            case InternalSettings::ButtonVeryLarge: return baseSize*5;
         }
 
     }
 
     //________________________________________________________________
     int Decoration::captionHeight() const
-    { return hideTitleBar() ? borderTop() : borderTop() - settings()->smallSpacing()*(Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin ) - 1; }
+    { return hideTitleBar() ? borderTop() : buttonHeight(); }
 
     //________________________________________________________________
     QPair<QRect,Qt::Alignment> Decoration::captionRect() const
@@ -745,7 +720,7 @@ namespace Inspire
                 Metrics::TitleBar_SideMargin*settings()->smallSpacing() :
                 size().width() - m_rightButtons->geometry().x() + Metrics::TitleBar_SideMargin*settings()->smallSpacing();
 
-            const int yOffset = settings()->smallSpacing()*Metrics::TitleBar_TopMargin;
+            const int yOffset = 0;
             const QRect maxRect( leftOffset, yOffset, size().width() - leftOffset - rightOffset, captionHeight() );
 
             switch( m_internalSettings->titleAlignment() )
@@ -925,7 +900,7 @@ namespace Inspire
     
     void Decoration::setScaledCornerRadius()
     {
-        m_scaledCornerRadius = Metrics::Frame_FrameRadius*settings()->smallSpacing();
+        m_scaledCornerRadius = Metrics::Frame_FrameRadius;
         
     }
 } // namespace
