@@ -1,4 +1,4 @@
-add_definitions(-DTRANSLATION_DOMAIN="breeze_kwin_deco")
+add_definitions(-DTRANSLATION_DOMAIN="inspire_kwin_deco")
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets WindowSystem I18n IconThemes)
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus)
@@ -14,68 +14,68 @@ set_package_properties(XCB PROPERTIES
 
 if(UNIX AND NOT APPLE)
 
-  set(BREEZE_HAVE_X11 ${XCB_XCB_FOUND})
+  set(INSPIRE_HAVE_X11 ${XCB_XCB_FOUND})
   if (XCB_XCB_FOUND)
     find_package(Qt5 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS X11Extras)
   endif()
 
 else()
 
-  set(BREEZE_HAVE_X11 FALSE)
+  set(INSPIRE_HAVE_X11 FALSE)
 
 endif()
 
 ################# configuration #################
-configure_file(config-breeze.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-breeze.h )
+configure_file(config-inspire.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-inspire.h )
 
 ################# includes #################
-include_directories(${CMAKE_SOURCE_DIR}/libbreezecommon)
-include_directories(${CMAKE_BINARY_DIR}/libbreezecommon)
+include_directories(${CMAKE_SOURCE_DIR}/libinspirecommon)
+include_directories(${CMAKE_BINARY_DIR}/libinspirecommon)
 
 ################# newt target #################
 ### plugin classes
-set(breezedecoration_SRCS
-    breezebutton.cpp
-    breezedecoration.cpp
-    breezeexceptionlist.cpp
-    breezesettingsprovider.cpp
-    breezesizegrip.cpp)
+set(inspiredecoration_SRCS
+    inspirebutton.cpp
+    inspiredecoration.cpp
+    inspireexceptionlist.cpp
+    inspiresettingsprovider.cpp
+    inspiresizegrip.cpp)
 
-kconfig_add_kcfg_files(breezedecoration_SRCS breezesettings.kcfgc)
+kconfig_add_kcfg_files(inspiredecoration_SRCS inspiresettings.kcfgc)
 
 ### config classes
 ### they are kept separately because they might move in a separate library in the future
-set(breezedecoration_config_SRCS
-    config/breezeconfigwidget.cpp
-    config/breezedetectwidget.cpp
-    config/breezeexceptiondialog.cpp
-    config/breezeexceptionlistwidget.cpp
-    config/breezeexceptionmodel.cpp
-    config/breezeitemmodel.cpp
+set(inspiredecoration_config_SRCS
+    config/inspireconfigwidget.cpp
+    config/inspiredetectwidget.cpp
+    config/inspireexceptiondialog.cpp
+    config/inspireexceptionlistwidget.cpp
+    config/inspireexceptionmodel.cpp
+    config/inspireitemmodel.cpp
 )
 
-set(breezedecoration_config_PART_FORMS
-   config/ui/breezeconfigurationui.ui
-   config/ui/breezedetectwidget.ui
-   config/ui/breezeexceptiondialog.ui
-   config/ui/breezeexceptionlistwidget.ui
+set(inspiredecoration_config_PART_FORMS
+   config/ui/inspireconfigurationui.ui
+   config/ui/inspiredetectwidget.ui
+   config/ui/inspireexceptiondialog.ui
+   config/ui/inspireexceptionlistwidget.ui
 )
 
-ki18n_wrap_ui(breezedecoration_config_PART_FORMS_HEADERS ${breezedecoration_config_PART_FORMS})
+ki18n_wrap_ui(inspiredecoration_config_PART_FORMS_HEADERS ${inspiredecoration_config_PART_FORMS})
 
 ### build library
-add_library(breezedecoration MODULE
-    ${breezedecoration_SRCS}
-    ${breezedecoration_config_SRCS}
-    ${breezedecoration_config_PART_FORMS_HEADERS})
+add_library(inspiredecoration MODULE
+    ${inspiredecoration_SRCS}
+    ${inspiredecoration_config_SRCS}
+    ${inspiredecoration_config_PART_FORMS_HEADERS})
 
-target_link_libraries(breezedecoration
+target_link_libraries(inspiredecoration
     PUBLIC
         Qt::Core
         Qt::Gui
         Qt::DBus
     PRIVATE
-        breezecommon5
+        inspirecommon5
         KDecoration2::KDecoration
         KF5::ConfigCore
         KF5::CoreAddons
@@ -85,13 +85,13 @@ target_link_libraries(breezedecoration
         KF5::IconThemes
         KF5::WindowSystem)
 
-if(BREEZE_HAVE_X11)
-  target_link_libraries(breezedecoration
+if(INSPIRE_HAVE_X11)
+  target_link_libraries(inspiredecoration
     PUBLIC
       Qt::X11Extras
       XCB::XCB)
 endif()
 
 
-install(TARGETS breezedecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2)
-install(FILES config/breezedecorationconfig.desktop DESTINATION  ${KDE_INSTALL_KSERVICES5DIR})
+install(TARGETS inspiredecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2)
+install(FILES config/inspiredecorationconfig.desktop DESTINATION  ${KDE_INSTALL_KSERVICES5DIR})

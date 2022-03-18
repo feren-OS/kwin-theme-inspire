@@ -1,0 +1,7 @@
+File=inspiresettingsdata.kcfg
+ClassName=InternalSettings
+NameSpace=Inspire
+Singleton=false
+Mutators=true
+GlobalEnums=true
+Notifiers=OutlineCloseButton

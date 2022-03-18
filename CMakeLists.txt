@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(breeze)
+project(inspire)
 set(PROJECT_VERSION "5.24.3")
 set(PROJECT_VERSION_MAJOR 5)
 
@@ -24,7 +24,7 @@ include(KDEClangFormat)
 
 include(GtkUpdateIconCache)
 
-option(WITH_DECORATIONS "Build Breeze window decorations for KWin" ON)
+option(WITH_DECORATIONS "Build Inspire window decorations for KWin" ON)
 if(WITH_DECORATIONS)
     find_package(KDecoration2 REQUIRED)
     add_subdirectory(kdecoration)
@@ -32,11 +32,11 @@ endif()
 
 add_subdirectory(colors)
 add_subdirectory(cursors)
-add_subdirectory(libbreezecommon)
+add_subdirectory(libinspirecommon)
 add_subdirectory(kstyle)
 add_subdirectory(misc)
 
-option(WITH_WALLPAPERS "Install Breeze default wallpapers" ON)
+option(WITH_WALLPAPERS "Install Inspire default wallpapers" ON)
 if (WITH_WALLPAPERS)
     add_subdirectory(wallpapers)
 endif()
@@ -47,15 +47,15 @@ if(EXISTS ${CMAKE_SOURCE_DIR}/po AND IS_DIRECTORY ${CMAKE_SOURCE_DIR}/po)
 endif()
 
 include(ECMSetupVersion)
-ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX BREEZE
-                  PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfigVersion.cmake"
+ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX INSPIRE
+                  PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/InspireConfigVersion.cmake"
                   )
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/Breeze")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/Inspire")
 
-configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/BreezeConfig.cmake.in"
-                                  "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfig.cmake"
+configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/InspireConfig.cmake.in"
+                                  "${CMAKE_CURRENT_BINARY_DIR}/InspireConfig.cmake"
                                   PATH_VARS KDE_INSTALL_FULL_DATADIR
                                   INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
                                   )
@@ -64,8 +64,8 @@ configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/BreezeConfig.cmake.in
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
-install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfig.cmake"
-               "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfigVersion.cmake"
+install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/InspireConfig.cmake"
+               "${CMAKE_CURRENT_BINARY_DIR}/InspireConfigVersion.cmake"
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
         )
