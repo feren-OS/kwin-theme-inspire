@@ -227,7 +227,7 @@ namespace Inspire
                         gradient.setColorAt(1, backgroundColor);
                         painter->setBrush( gradient );
                         painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
-                        if( isHovered() && !isPressed() && !isChecked() ) {
+                        if( isHovered() && !isPressed() ) {
                             //Illusion Sign "Button Shadow"
                             painter->setPen( Qt::NoPen );
                             QColor col2( 0,0,0 );
@@ -262,7 +262,7 @@ namespace Inspire
                         gradient.setColorAt(1, backgroundColor);
                         painter->setBrush( gradient );
                         painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
-                        if( isHovered() && !isPressed() && !isChecked() ) {
+                        if( isHovered() && !isPressed() ) {
                             //Illusion Sign "Button Shadow"
                             painter->setPen( Qt::NoPen );
                             QColor col2( 0,0,0 );
@@ -312,7 +312,7 @@ namespace Inspire
                         gradient.setColorAt(1, backgroundColor);
                         painter->setBrush( gradient );
                         painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
-                        if( isHovered() && !isPressed() && !isChecked() ) {
+                        if( isHovered() && !isPressed() ) {
                             //Illusion Sign "Button Shadow"
                             painter->setPen( Qt::NoPen );
                             QColor col2( 0,0,0 );
@@ -348,7 +348,7 @@ namespace Inspire
                         gradient.setColorAt(1, backgroundColor);
                         painter->setBrush( gradient );
                         painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
-                        if( isHovered() && !isPressed() && !isChecked() ) {
+                        if( isHovered() && !isPressed() ) {
                             //Illusion Sign "Button Shadow"
                             painter->setPen( Qt::NoPen );
                             QColor col2( 0,0,0 );
@@ -412,7 +412,7 @@ namespace Inspire
                         gradient.setColorAt(1, backgroundColor);
                         painter->setBrush( gradient );
                         painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
-                        if( isHovered() && !isPressed() && !isChecked() ) {
+                        if( isHovered() && !isPressed() ) {
                             //Illusion Sign "Button Shadow"
                             painter->setPen( Qt::NoPen );
                             QColor col2( 0,0,0 );
@@ -462,7 +462,7 @@ namespace Inspire
                         gradient.setColorAt(1, backgroundColor);
                         painter->setBrush( gradient );
                         painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
-                        if( isHovered() && !isPressed() && !isChecked() ) {
+                        if( isHovered() && !isPressed() ) {
                             //Illusion Sign "Button Shadow"
                             painter->setPen( Qt::NoPen );
                             QColor col2( 0,0,0 );
@@ -505,7 +505,7 @@ namespace Inspire
                         gradient.setColorAt(1, backgroundColor);
                         painter->setBrush( gradient );
                         painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
-                        if( isHovered() && !isPressed() && !isChecked() ) {
+                        if( isHovered() && !isPressed() ) {
                             //Illusion Sign "Button Shadow"
                             painter->setPen( Qt::NoPen );
                             QColor col2( 0,0,0 );
@@ -548,7 +548,7 @@ namespace Inspire
                         gradient.setColorAt(1, backgroundColor);
                         painter->setBrush( gradient );
                         painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
-                        if( isHovered() && !isPressed() && !isChecked() ) {
+                        if( isHovered() && !isPressed() ) {
                             //Illusion Sign "Button Shadow"
                             painter->setPen( Qt::NoPen );
                             QColor col2( 0,0,0 );
@@ -584,7 +584,7 @@ namespace Inspire
                         gradient.setColorAt(1, backgroundColor);
                         painter->setBrush( gradient );
                         painter->drawRoundedRect(QRectF( 2, 2, 32, 26 ), buttonradius, buttonradius);
-                        if( isHovered() && !isPressed() && !isChecked() ) {
+                        if( isHovered() && !isPressed() ) {
                             //Illusion Sign "Button Shadow"
                             painter->setPen( Qt::NoPen );
                             QColor col2( 0,0,0 );
